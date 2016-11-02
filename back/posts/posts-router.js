@@ -14,7 +14,8 @@ const getPosts = (req, res) => {
 
 //Create a new test post in database
 const postPosts = (req, res) => {
-  Post.create({title: 'test post', test: 'sucessfully created a test post'}, () => {
+  console.log(req.body)
+  Post.create({title: 'testing123', test: 'sucessfully created a test post'}, () => {
     console.log('post successfully created');
   })
 }
@@ -23,5 +24,6 @@ const postPosts = (req, res) => {
 router.route('/')
   .get(getPosts)
   .post(postPosts)
+
 
 module.exports = router;
