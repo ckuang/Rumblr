@@ -6,11 +6,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-
-//
-// const path = require('path')
-// const rootPath = path.join(__dirname, '../../')
-// var bodyParser = require('body-parser');
+const path = require('path')
+const rootPath = path.join(__dirname, '../../')
+var bodyParser = require('body-parser');
 
 
 //Require in models:
@@ -27,14 +25,12 @@ mongoose.connect('mongodb://localhost/blog-app');
 const db = mongoose.connection;
 //Start the server after successful database connection:
 db.on('open', () => {
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(express.static('bundle'))
   app.use('/posts', routes.posts);
-  app.use('*', routes.home);
+  app.use('/', routes.home);
   //Launch server on port 4444:
-  app.listen(4444, () => {
-    console.log('App listening on port 4444');
+  app.listen(3000, () => {
+    console.log('App listening on port 3000');
   });
 });
-
-  //Configure router:
-  // app.use(bodyParser.urlencoded({ extended: false }));
-  // app.use(express.static('bundle'))
